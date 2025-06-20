@@ -29,3 +29,8 @@ def get_name_user_web(driver):
         EC.presence_of_element_located((By.CLASS_NAME, "name"))
     )
     return nombre_elemento.text.strip()
+
+
+def fetchall_dict(cursor):
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]

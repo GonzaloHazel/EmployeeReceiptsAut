@@ -14,4 +14,8 @@ LONG_WAIT = 5
 
 #TAGS
 USER_EMAIL ="email"
-USER_PASSWORD ="key"
+USER_PASSWORD ="user_key"
+
+#SP
+SQL_GETDATE="SELECT GETDATE();"
+SP_GETUSERS="exec dbo.getUsers"

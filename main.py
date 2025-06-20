@@ -12,13 +12,14 @@ def main():
         driver = configBrowser()
         url = os.getenv("URL_")
         logger.info(f"Cargando url -> {url}")
-        go_to_portal(driver, url)
         users = get_users()
 
         for user in users:
+            go_to_portal(driver, url)
             success = login(driver, user)
             if success:
                 recipts_by_year(driver)
+                logout(driver)
 
     except Exception as e:
         logger.exception(f"Ocurrio un error critico: {e}")

@@ -114,7 +114,7 @@ def logout(driver):
         logger.warning(f"No se pudo hacer logout: {e}")
         return False
 
-def recipts_by_year(driver, year="2021"):
+def recipts_by_year(driver, year="2025"):
     try:
         recipts_secction=WebDriverWait(driver, 5).until(
                   EC.element_to_be_clickable(
