@@ -1,0 +1,26 @@
+name: Verificar formato con Black
+
+on: [push, pull_request]
+
+jobs:
+  format:
+    name: Verificación de formato
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.7"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verificar formato con Black
+        run: |
+          black --check .
