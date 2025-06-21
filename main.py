@@ -4,6 +4,8 @@ from utils.logger import logger
 from dotenv import load_dotenv
 import os
 
+from web_automation.receipt_scraper import recipts_by_year
+
 
 def main():
     logger.info("Inicio de ejecucion ok!")
