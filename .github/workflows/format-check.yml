@@ -23,4 +23,7 @@ jobs:
 
       - name: Verificar formato con Black
         run: |
-          black --check .
+          echo "Revisando formato con Black..."
+          black --check . || (
+            echo "::error::El formato no es válido. Ejecuta 'black .' en local para corregir." && exit 1
+          )
