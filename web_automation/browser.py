@@ -15,6 +15,7 @@ from utils.logger import logger
 from utils.helpers import esperar_elemento, get_name_user_web
 from utils.constants import *
 
+
 def configBrowser():
     try:
         service = Service(EdgeChromiumDriverManager().install())
@@ -24,7 +25,8 @@ def configBrowser():
         driver = Edge(service=service, options=option)
         return driver
     except WebDriverException as e:
-        logger.error(f'Error en la configuraicon de browser')
+        logger.error(f"Error en la configuraicon de browser")
+
 
 def go_to_portal(driver, url):
     if not url or not url.startswith("http"):
@@ -42,7 +44,7 @@ def login(driver, user):
     logger.debug(f"datos entrantes -> {driver}, {user}")
     try:
         email_input = esperar_elemento(driver, By.NAME, LOGIN_EMAIL_NAME, 3)
-        password_input = esperar_elemento(driver, By.ID,LOGIN_PASSWORD_ID , 3)
+        password_input = esperar_elemento(driver, By.ID, LOGIN_PASSWORD_ID, 3)
         login_button = esperar_elemento(driver, By.CLASS_NAME, LOGIN_BUTTON_NAME, 3)
 
         if not all([email_input, password_input, login_button]):
@@ -61,15 +63,13 @@ def login(driver, user):
         )
 
         # Validación de login fallido
-        if driver.find_elements(By.CLASS_NAME,ALERT_CLASS):
+        if driver.find_elements(By.CLASS_NAME, ALERT_CLASS):
             logger.warning("Credenciales inválidas.")
             return False
         # Validar si estan los elementos de cerrar session o la seccion de recibos tambien el nombre e usuario
         try:
             WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, XPATH_LOGOUT)
-                )
+                EC.presence_of_element_located((By.XPATH, XPATH_LOGOUT))
             )
             WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located(
@@ -97,7 +97,7 @@ def logout(driver):
     try:
         # Paso 1: Click para abrir el menú desplegable
         menu_toggle = WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.CLASS_NAME,DROPDOWN_CLASS ))
+            EC.element_to_be_clickable((By.CLASS_NAME, DROPDOWN_CLASS))
         )
         menu_toggle.click()
 
@@ -113,6 +113,3 @@ def logout(driver):
     except Exception as e:
         logger.warning(f"No se pudo hacer logout: {e}")
         return False
-
-
-
